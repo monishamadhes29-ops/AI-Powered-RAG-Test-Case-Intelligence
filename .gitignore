@@ -1,0 +1,36 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# React build
+build/
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Uploaded files
+uploads/
+
+# Generated data
+src/data/*.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Temp files
+temp-*.js
+server/temp-*.js
+
+# Test coverage
+coverage/

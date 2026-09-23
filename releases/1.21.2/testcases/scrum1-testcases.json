@@ -1,0 +1,203 @@
+[
+  {
+    "scrumId": "SCRUM1",
+    "testCaseId": "TC_S1_001",
+    "module": "Doctor Dashboard / Patient Queue",
+    "testCaseTitle": "Auto-refresh updates queue when patient status changes",
+    "testCaseDescription": "Verify that the dynamic AHC queue refreshes automatically within 30 seconds when a patient status changes in the system and the queue order updates accordingly.",
+    "preconditions": "Doctor is logged into the dashboard and the queue list is currently visible. Patient records exist with statuses such as Waiting, Under Examination, and Discharged.",
+    "testSteps": [
+      "1. Open the doctor dashboard and navigate to the AHC queue list.",
+      "2. Observe the current queue order and patient status values.",
+      "3. Change the status of one patient in the system from Waiting to Under Examination or Discharged.",
+      "4. Wait for up to 30 seconds for the queue to auto-refresh.",
+      "5. Verify that the patient row is moved or visually updated according to the new status."
+    ],
+    "expectedResults": "The queue refreshes automatically within 30 seconds, and the patient position and color coding are updated based on the new status.",
+    "priority": "P1",
+    "testType": "Functional",
+    "riskLevel": "Medium",
+    "linkedUserStories": ["HC-287"],
+    "sourceCitations": ["HC-287"],
+    "complianceNotes": "Ensure patient status updates are reflected without exposing unauthorized patient data.",
+    "estimatedExecutionTime": "5-10 mins"
+  },
+  {
+    "scrumId": "SCRUM1",
+    "testCaseId": "TC_S1_002",
+    "module": "Doctor Dashboard / Patient Queue",
+    "testCaseTitle": "Emergency filter shows only critical-priority patients",
+    "testCaseDescription": "Verify that applying the Emergency filter displays only patients flagged with emergency priority and hides routine cases.",
+    "preconditions": "The queue contains patients with both emergency and routine priorities.",
+    "testSteps": [
+      "1. Open the AHC queue page.",
+      "2. Select the Emergency priority filter.",
+      "3. Observe the displayed patient list.",
+      "4. Compare the visible patients with the underlying queue data."
+    ],
+    "expectedResults": "Only emergency-priority patients are visible, and routine-priority patients are hidden from the list.",
+    "priority": "P1",
+    "testType": "Functional",
+    "riskLevel": "Medium",
+    "linkedUserStories": ["HC-287"],
+    "sourceCitations": ["HC-287"],
+    "complianceNotes": "Filter logic must not alter patient safety handling or override priority rules.",
+    "estimatedExecutionTime": "3-5 mins"
+  },
+  {
+    "scrumId": "SCRUM1",
+    "testCaseId": "TC_S1_003",
+    "module": "Doctor Dashboard / Patient Queue",
+    "testCaseTitle": "Active filters and scroll position are preserved after auto-refresh",
+    "testCaseDescription": "Verify that the UI retains the selected filters and current scroll position after an automatic refresh event.",
+    "preconditions": "The doctor dashboard is open and a specific filter combination is already applied. The list is scrolled to a mid-point position.",
+    "testSteps": [
+      "1. Apply a filter such as Emergency and a status filter such as Waiting.",
+      "2. Scroll the queue list to a specific position.",
+      "3. Trigger a data change that causes the queue to refresh automatically.",
+      "4. Wait for the refresh to complete.",
+      "5. Review the UI state after refresh."
+    ],
+    "expectedResults": "The selected filters remain active and the scroll position is preserved without the need for manual reload.",
+    "priority": "P2",
+    "testType": "Functional",
+    "riskLevel": "Medium",
+    "linkedUserStories": ["HC-287"],
+    "sourceCitations": ["HC-287"],
+    "complianceNotes": "The UI must not lose the current context for a clinician during live updates.",
+    "estimatedExecutionTime": "4-6 mins"
+  },
+  {
+    "scrumId": "SCRUM1",
+    "testCaseId": "TC_S1_004",
+    "module": "Prescription Management",
+    "testCaseTitle": "Pending prescriptions appear for doctor verification",
+    "testCaseDescription": "Verify that doctors can view all pending prescriptions in the verification module before approval.",
+    "preconditions": "A doctor is logged in and there are existing pending prescriptions linked to patient records.",
+    "testSteps": [
+      "1. Open the prescription verification module.",
+      "2. Review the list of prescriptions displayed on the page.",
+      "3. Confirm that pending prescriptions from multiple physicians are visible.",
+      "4. Select a pending prescription for review."
+    ],
+    "expectedResults": "All pending prescriptions are displayed for the doctor to review and verify.",
+    "priority": "P1",
+    "testType": "Functional",
+    "riskLevel": "High",
+    "linkedUserStories": ["HC-310"],
+    "sourceCitations": ["HC-310"],
+    "complianceNotes": "Prescription data must be accessible only to authorized clinicians.",
+    "estimatedExecutionTime": "5-8 mins"
+  },
+  {
+    "scrumId": "SCRUM1",
+    "testCaseId": "TC_S1_005",
+    "module": "Prescription Management",
+    "testCaseTitle": "System highlights dosage conflicts and duplicate medications",
+    "testCaseDescription": "Verify that the system detects conflicts such as duplicate medicines or incorrect dosage and marks them for review with AI-based recommendations.",
+    "preconditions": "A prescription contains one or more issues such as duplicate medication entries or a dosage conflict.",
+    "testSteps": [
+      "1. Open a prescription with a known conflict or duplicate medication.",
+      "2. Review the verification screen.",
+      "3. Observe whether the issue is highlighted and a recommendation is shown.",
+      "4. Compare guidance with the medication details."
+    ],
+    "expectedResults": "The system clearly flags the prescription issue and provides correction recommendations for the doctor to review.",
+    "priority": "P1",
+    "testType": "Functional",
+    "riskLevel": "High",
+    "linkedUserStories": ["HC-310"],
+    "sourceCitations": ["HC-310"],
+    "complianceNotes": "Recommendations must not override clinician judgment and should maintain medication safety checks.",
+    "estimatedExecutionTime": "5-7 mins"
+  },
+  {
+    "scrumId": "SCRUM1",
+    "testCaseId": "TC_S1_006",
+    "module": "Prescription Management",
+    "testCaseTitle": "Approved prescription is synced to pharmacy dispensing queue",
+    "testCaseDescription": "Verify that once a prescription is approved and verified, the system updates the pharmacy module and makes the item available for dispensing.",
+    "preconditions": "A prescription has been reviewed and is ready for approval.",
+    "testSteps": [
+      "1. Open the prescription verification workflow.",
+      "2. Review the details and confirm that the prescription is correct.",
+      "3. Click Approve for the prescription.",
+      "4. Open the pharmacy dispensing queue.",
+      "5. Verify that the prescription appears in the queue."
+    ],
+    "expectedResults": "The approved prescription is automatically synchronized to the pharmacy dispensing queue.",
+    "priority": "P1",
+    "testType": "Integration",
+    "riskLevel": "High",
+    "linkedUserStories": ["HC-310"],
+    "sourceCitations": ["HC-310"],
+    "complianceNotes": "Medication-order synchronization must preserve audit trail and access control.",
+    "estimatedExecutionTime": "6-10 mins"
+  },
+  {
+    "scrumId": "SCRUM1",
+    "testCaseId": "TC_S1_007",
+    "module": "Billing / Insurance Automation",
+    "testCaseTitle": "System verifies insurance eligibility before radiology scheduling",
+    "testCaseDescription": "Verify that when a radiology test is scheduled, the system calls the insurance provider API and retrieves coverage information before the appointment is finalized.",
+    "preconditions": "A patient is selected for a radiology procedure such as CT, MRI, or ultrasound and the billing coordinator is logged in.",
+    "testSteps": [
+      "1. Open the scheduling screen for a radiology test.",
+      "2. Select Schedule Test.",
+      "3. Observe the insurance verification process.",
+      "4. Review the result returned by the insurance API."
+    ],
+    "expectedResults": "The system verifies insurance eligibility automatically before scheduling the radiology test.",
+    "priority": "P1",
+    "testType": "Integration",
+    "riskLevel": "High",
+    "linkedUserStories": ["HC-311"],
+    "sourceCitations": ["HC-311"],
+    "complianceNotes": "Insurance verification must use secure data handling and protect patient financial information.",
+    "estimatedExecutionTime": "5-8 mins"
+  },
+  {
+    "scrumId": "SCRUM1",
+    "testCaseId": "TC_S1_008",
+    "module": "Billing / Insurance Automation",
+    "testCaseTitle": "Pre-authorization ID is stored when authorization is required",
+    "testCaseDescription": "Verify that if the insurance result requires pre-authorization, the system initiates the process and stores the authorization ID and approval date in the billing record.",
+    "preconditions": "The insurance provider response indicates that pre-authorization is required for the selected test.",
+    "testSteps": [
+      "1. Schedule a radiology test that needs pre-authorization.",
+      "2. Complete the scheduling action.",
+      "3. Review the billing record for the order.",
+      "4. Check whether the authorization ID and approval date are saved."
+    ],
+    "expectedResults": "The system stores the authorization ID and approval date in the billing record after a successful pre-authorization request.",
+    "priority": "P1",
+    "testType": "Functional",
+    "riskLevel": "High",
+    "linkedUserStories": ["HC-311"],
+    "sourceCitations": ["HC-311"],
+    "complianceNotes": "Authorization data must be stored securely and linked to the correct patient account.",
+    "estimatedExecutionTime": "5-7 mins"
+  },
+  {
+    "scrumId": "SCRUM1",
+    "testCaseId": "TC_S1_009",
+    "module": "Billing / Insurance Automation",
+    "testCaseTitle": "Uncovered radiology test notifies coordinator and patient with alternatives",
+    "testCaseDescription": "Verify that when insurance does not cover the requested radiology test, the system notifies the coordinator and the patient and provides alternative payment options.",
+    "preconditions": "The insurance provider response indicates that the test is not covered under the patient plan.",
+    "testSteps": [
+      "1. Schedule a radiology test that the insurer marks as uncovered.",
+      "2. Review the system notification output.",
+      "3. Check the coordinator notification and patient notification channels.",
+      "4. Confirm that alternate payment options are offered."
+    ],
+    "expectedResults": "Both the billing coordinator and the patient receive notifications, and alternative payment options are presented.",
+    "priority": "P1",
+    "testType": "Functional",
+    "riskLevel": "High",
+    "linkedUserStories": ["HC-311"],
+    "sourceCitations": ["HC-311"],
+    "complianceNotes": "Communication must be clear, timely, and compliant with patient billing privacy requirements.",
+    "estimatedExecutionTime": "5-8 mins"
+  }
+]
